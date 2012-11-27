@@ -3,6 +3,6 @@ namespace Org\Plista\Curd\Exception;
 
 /**
  */
-class ModelException extends CurdException {
+class ModelException extends Exception {
 
 }

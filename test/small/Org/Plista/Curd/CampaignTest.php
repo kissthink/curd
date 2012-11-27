@@ -58,3 +58,6 @@ class Campaign extends Model {
 Campaign::listener()->add(Model::ON_POST_SAVE, function (Campaign $c) {
 	// some example
 });
+
+//MySQL::setReadPDO(new \PDO('dsn', 'username', 'password', ''));
+//MySQL::setWritePDO(new \PDO('dsn', 'username', 'password', ''));
