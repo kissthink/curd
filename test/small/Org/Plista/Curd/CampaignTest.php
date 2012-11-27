@@ -55,6 +55,6 @@ class Campaign extends Model {
 	}
 }
 
-Campaign::listener()->add(Model::ON_POST_PERSIST, function (Campaign $c) {
+Campaign::listener()->add(Model::ON_POST_SAVE, function (Campaign $c) {
 	// some example
 });
