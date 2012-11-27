@@ -36,7 +36,7 @@ class Listener {
 			return;
 		}
 
-		foreach ($this->listeners[$eventname] as $callback)  {
+		foreach ($this->listeners[$eventname] as $callback) {
 			$callback($this, $eventname);
 		}
 	}
@@ -50,7 +50,7 @@ class Listener {
 			return;
 		}
 
-		foreach ($this->listeners as $idx => $existingCallback)  {
+		foreach ($this->listeners as $idx => $existingCallback) {
 			if ($callback === $existingCallback) {
 				unset($this->listeners[$idx]);
 			}

@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__).'/../../../bootstrap.php');
+require_once __DIR__ . '/../../../bootstrap.php';
 
 use Org\Plista\Curd\Model;
 use Org\Plista\Curd\Association;
@@ -25,8 +25,7 @@ class CampaignTest extends PHPUnit_Framework_TestCase {
  */
 class Campaign extends Model {
 
-	protected static $storage_settings = array(
-	);
+	protected static $storage_settings = array();
 
 	/**
 	 * @ORM\Column(type="integer")
@@ -56,6 +55,6 @@ class Campaign extends Model {
 	}
 }
 
-Campaign::listener()->add(Model::ON_POST_PERSIST, function(Campaign $c) {
+Campaign::listener()->add(Model::ON_POST_PERSIST, function (Campaign $c) {
 	// some example
 });
