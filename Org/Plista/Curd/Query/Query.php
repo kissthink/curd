@@ -24,12 +24,22 @@ class Query {
 	/**
 	 * @var array
 	 */
+	private $_notin;
+
+	/**
+	 * @var array
+	 */
 	private $_where;
 
 	/**
 	 * @var array
 	 */
 	private $_between;
+
+	/**
+	 * @var array
+	 */
+	private $_notbetween;
 
 	/**
 	 * @var int
@@ -114,6 +124,43 @@ class Query {
 		return $this;
 	}
 
+	/**
+	 * @param string $field
+	 * @param array $values
+	 * @throws InvalidArgumentException
+	 * @return Query
+	 */
+	public function notin($field, array $values) {
+		if (!is_string($field)) {
+			throw new InvalidArgumentException('invalid field: ' . $field);
+		}
+		// TODO: especially in sql its not allowed to have a null/empty string within values, where to do validation
+		$this->_notin[] = array($field, $values);
+		return $this;
+	}
+
+
+	/**
+	 * @param string $field
+	 * @param string|int|float $min
+	 * @param string|int|float $max
+	 * @throws InvalidArgumentException
+	 * @return Query
+	 */
+	public function notbetween($field, $min, $max) {
+		if (!is_string($field)) {
+			throw new InvalidArgumentException('invalid field: ' . $field);
+		}
+		if (is_scalar($min)) {
+			throw new InvalidArgumentException('invalid min: ' . $min);
+		}
+		if (is_scalar($min)) {
+			throw new InvalidArgumentException('invalid max: ' . $max);
+		}
+		$this->_notbetween[] = array($field, $min, $max);
+		return $this;
+	}
+
 
 	/**
 	 * @param int $limit
@@ -158,6 +205,13 @@ class Query {
 	/**
 	 * @return array
 	 */
+	public function getNotBetween() {
+		return $this->_notbetween;
+	}
+
+	/**
+	 * @return array
+	 */
 	public function getWhere() {
 		return $this->_where;
 	}
@@ -167,6 +221,13 @@ class Query {
 	 */
 	public function getIn() {
 		return $this->_in;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getNotIn() {
+		return $this->_notin;
 	}
 
 	/**
