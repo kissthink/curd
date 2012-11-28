@@ -20,7 +20,7 @@ We use profilers for passion so we decided
 
 Usability
 ---------
-We focus on a good development lifecycle.
+We focus on a good development lifecycle. We try to ensure that Curd will be compatible with https://github.com/facebook/hiphop-php
  * IDE Support
  * type safety for more consistenty
 
