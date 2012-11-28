@@ -1,0 +1,7 @@
+<phpunit>
+	<testsuites>
+		<testsuite name="Small tests">
+			<directory>test/small/Org/Plista/Curd</directory>
+		</testsuite>
+	</testsuites>
+</phpunit>
