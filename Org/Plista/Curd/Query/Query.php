@@ -34,12 +34,12 @@ class Query {
 	/**
 	 * @var int
 	 */
-	private $_limit;
+	private $_limit = 0;
 
 	/**
 	 * @var int
 	 */
-	private $_offset;
+	private $_offset = 0;
 
 	/**
 	 * @param string $classname
@@ -47,7 +47,7 @@ class Query {
 	 */
 	public function __construct($classname) {
 		if (!is_string($classname)) {
-			throw new InvalidArgumentException('invalid classname');
+			throw new InvalidArgumentException('invalid classname: ' . $classname);
 		}
 		$this->classname = $classname;
 	}
@@ -71,7 +71,7 @@ class Query {
 	 */
 	public function where($field, $operator, $value) {
 		if (!is_string($field)) {
-			throw new InvalidArgumentException('invalid field');
+			throw new InvalidArgumentException('invalid field: ' . $field);
 		}
 		$this->_where[] = array($field, $operator, $value);
 		return $this;
@@ -85,7 +85,7 @@ class Query {
 	 */
 	public function in($field, array $values) {
 		if (!is_string($field)) {
-			throw new InvalidArgumentException('invalid field');
+			throw new InvalidArgumentException('invalid field: ' . $field);
 		}
 		// TODO: especially in sql its not allowed to have a null/empty string within values, where to do validation
 		$this->_in[] = array($field, $values);
@@ -102,13 +102,13 @@ class Query {
 	 */
 	public function between($field, $min, $max) {
 		if (!is_string($field)) {
-			throw new InvalidArgumentException('invalid field');
+			throw new InvalidArgumentException('invalid field: ' . $field);
 		}
-		if (!is_scalar($min)) {
-			throw new InvalidArgumentException('invalid min');
+		if (is_scalar($min)) {
+			throw new InvalidArgumentException('invalid min: ' . $min);
 		}
-		if (!is_scalar($min)) {
-			throw new InvalidArgumentException('invalid max');
+		if (is_scalar($min)) {
+			throw new InvalidArgumentException('invalid max: ' . $max);
 		}
 		$this->_between[] = array($field, $min, $max);
 		return $this;
@@ -122,7 +122,7 @@ class Query {
 	 */
 	public function limit($limit) {
 		if ($limit != intval($limit)) {
-			throw new InvalidArgumentException('invalid max');
+			throw new InvalidArgumentException('invalid limit: ' . $limit);
 		}
 		$this->_limit = $limit;
 		return $this;
@@ -135,7 +135,7 @@ class Query {
 	 */
 	public function offset($offset) {
 		if ($offset != intval($offset)) {
-			throw new InvalidArgumentException('invalid max');
+			throw new InvalidArgumentException('invalid offset: ' . $offset);
 		}
 		$this->_offset = $offset;
 		return $this;
