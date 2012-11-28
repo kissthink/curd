@@ -64,3 +64,7 @@ class Campaign extends Model {
 //$mysql->setWriteConnection($pdo);
 
 //Campaign::addStorage($mysql);
+
+
+//Campaign::find(5);
+//Campaign::query()->where("dasdas", "jhgjh")->findAll();

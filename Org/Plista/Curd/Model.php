@@ -43,17 +43,37 @@ abstract class Model {
 	}
 
 	/**
+	 * @param $id
+	 * @throws Exception\ModelException
 	 * @return self
 	 */
-	public static function find() {
+	public static function find($id) {
 
+		$pks = self::getPrimaryKey();
+		if( !is_array( $id ) ) {
+			if( count($pks) > 1 ) {
+				throw new \Org\Plista\Curd\Exception\ModelException("This model has more than just one primary key.");
+			} else {
+				$id = array( $pks[0] => $id );
+			}
+		}
+
+		if( $pks != array_keys($id) ) {
+			throw new \Org\Plista\Curd\Exception\ModelException("Please ensure that you passed all primary keys for this model.");
+		}
+
+		$query = self::query();
+		foreach( $id as $key => $value ) {
+			$query = $query->where($key, $value);
+		}
+		return $query->find();
 	}
 
 	/**
-	 * @return self[]
+	 * @return Query\Query
 	 */
-	public static function findAll() {
-
+	public static function query() {
+		return new \Org\Plista\Curd\Query\Query(get_called_class());
 	}
 
 	/**
@@ -62,5 +82,12 @@ abstract class Model {
 	public static function listener() {
 		$classname = get_called_class();
 		return Listener::getInstance($classname);
+	}
+
+	/**
+	 * @return array
+	 */
+	public static function getPrimaryKey() {
+		return array("id");
 	}
 }

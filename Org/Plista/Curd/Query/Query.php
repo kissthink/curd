@@ -74,12 +74,12 @@ class Query {
 
 	/**
 	 * @param string $field attribute name
-	 * @param string $operator  > < = >= <= like
 	 * @param string|null|int|float $value
+	 * @param string $operator  > < = >= <= like
 	 * @throws InvalidArgumentException
 	 * @return Query
 	 */
-	public function where($field, $operator, $value) {
+	public function where($field, $value, $operator = '=') {
 		if (!is_string($field)) {
 			throw new InvalidArgumentException('invalid field: ' . $field);
 		}
