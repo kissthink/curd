@@ -25,42 +25,42 @@ class CampaignTest extends PHPUnit_Framework_TestCase {
  */
 class Campaign extends Model {
 
-	protected static $storage_settings = array();
+//	protected static $storage_settings = array();
 
 	/**
 	 * @ORM\Column(type="integer")
 	 * @var int
 	 */
-	public $id;
+//	public $id;
 
 	/**
 	 * @ORM\Column(type="varchar",length=255)
 	 * @var string
 	 */
-	public $name;
+//	public $name;
 
 	/**
 	 * @return Domain
 	 */
-	public function domain() {
-		return Association::factory($this, 'domain');
-	}
+//	public function domain() {
+//		return Association::factory($this, 'domain');
+//	}
 
-	public function stats() {
-		return CampaignStats::factory($this);
-	}
+//	public function stats() {
+//		return CampaignStats::factory($this);
+//	}
 
-	public function options() {
-		return ModelOption::factory($this);
-	}
+//	public function options() {
+//		return ModelOption::factory($this);
+//	}
 }
 
-Campaign::listener()->add(Model::ON_POST_SAVE, function (Campaign $c) {
+//Campaign::listener()->add(Model::ON_POST_SAVE, function (Campaign $c) {
 	// some example
-});
+//});
 
-$mysql = new \Org\Plista\Curd\Storage\Engine\MySQLPDO();
-$mysql->setReadConnection($pdo);
-$mysql->setWriteConnection($pdo);
+//$mysql = new \Org\Plista\Curd\Storage\Engine\MySQLPDO();
+//$mysql->setReadConnection($pdo);
+//$mysql->setWriteConnection($pdo);
 
-Campaign::addStorage($mysql);
+//Campaign::addStorage($mysql);
