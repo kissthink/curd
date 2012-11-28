@@ -1,7 +1,42 @@
-curd
+Curd
 ====
+Create, update, read and delete for PHP. ORM, DAO, Active Record, Different Database Layers, ...
 
-Create, update, read and delete for PHP. ORM, DAO, Different Database Layers, ...
+Curd is still in development and not meant for usage yet.
+There are still some open issues for the version 1 release: https://github.com/plista/curd/issues?milestone=1&state=open
+
+Storage Engine Pipeline
+-----------------------
+Curd has a storage engine pipeline. You can have many caching layers and a primary storage at the end.
+Currently Curd supports APC, Redis and MySQL, but we are pleased to accept any pull request
+if you want Curd to become the favorite ORM for MongoDB, Cassandra or else.
+
+High Performance
+----------------
+Curd was built for high performance read throughput. Either on the database or on the php client side.
+We use profilers for passion so we decided
+ * NO magic method calls
+ * PSR-0 Autoloader
+
+Usability
+---------
+We focus on a good development lifecycle.
+ * IDE Support
+ * type safety for more consistenty
+
+Testing
+-------
+We split into small, medium and large tests.
+ * small: test covers single class without dependencies, everything else needs to be mocked.
+ * medium: test covers the interaction between different classes, db access is allowed
+ * large: integration test, db access, browser stack, etc
+
+Concurrency
+-----------
+With the flexible architecture of different storage engines we need to take care for concurrency issues.
+An updated cache version should not overwrite the latest version in the primary storage.
+We use versioning for this.
+
 
 License
 -------
