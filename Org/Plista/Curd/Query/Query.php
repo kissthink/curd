@@ -196,6 +196,13 @@ class Query {
 	}
 
 	/**
+	 * @return int
+	 */
+	public function getLimit() {
+		return $this->_limit;
+	}
+
+	/**
 	 * @return array
 	 */
 	public function getBetween() {
@@ -245,17 +252,28 @@ class Query {
 	}
 
 	/**
+	 * @throws Exception
 	 * @return \Org\Plista\Curd\Model
 	 */
 	public function find() {
+		if ($this->getLimit() != 1) {
+			throw new Exception('find only supports limit 1, limit was ' . $this->getLimit());
+		}
+
 		$p = new \Org\Plista\Curd\Storage\Pipeline($this);
 		return $p->find();
 	}
 
 	/**
+	 * @throws Exception
 	 * @return \Org\Plista\Curd\Model[]
 	 */
 	public function findAll() {
+		if ($this->getLimit() < 0) {
+			throw new Exception('find only supports limit >= 0, where 0 means infinity,
+				limit was ' . $this->getLimit());
+		}
+
 		$p = new \Org\Plista\Curd\Storage\Pipeline($this);
 		return $p->findAll();
 	}
